@@ -1,6 +1,8 @@
 FROM debian:jessie
 MAINTAINER Tim Peters <mail@darksecond.nl>
 
+RUN groupadd -r vmail && useradd -r -g vmail vmail
+
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
@@ -10,6 +12,9 @@ RUN rm -rf /etc/dovecot
 ADD dovecot /etc/dovecot
 
 ADD entrypoint.sh /entrypoint.sh
+
+VOLUME ["/var/vmail"]
+VOLUME ["/etc/dovecot/passwd"]
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["dovecot", "-F"]
