@@ -1,0 +1,24 @@
+FROM debian:jessie
+MAINTAINER Tim Peters <mail@darksecond.nl>
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update
+RUN apt-get install -y dovecot-core dovecot-imapd dovecot-lmtpd dovecot-sieve
+
+RUN rm -rf /etc/dovecot
+ADD dovecot /etc/dovecot
+
+ADD entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["dovecot", "-F"]
+
+# SASL
+EXPOSE 12345
+# IMAP
+EXPOSE 143
+# IMAPS
+EXPOSE 993
+# LMTP
+EXPOSE 24
