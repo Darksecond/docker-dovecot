@@ -11,6 +11,9 @@ RUN apt-get install -y dovecot-core dovecot-imapd dovecot-lmtpd dovecot-sieve
 RUN rm -rf /etc/dovecot
 ADD dovecot /etc/dovecot
 
+RUN sievec /etc/dovecot/sieve-before/
+RUN sievec /etc/dovecot/sieve-after/
+
 ADD entrypoint.sh /entrypoint.sh
 
 VOLUME ["/var/vmail"]

@@ -19,6 +19,8 @@ the hash can be generated using `doveadm pw -s SSHA512`
 
 ## Vmail
 This is the storage volume. The emails will be stored here.
+You can put global sieve before and after filters in `vmail/sieve-{before,after}`.
+They do not get compiled automatically right now.
 
 ## Example
 ```
